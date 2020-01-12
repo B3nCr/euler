@@ -19,6 +19,9 @@ namespace ProjectEulerTests
         [InlineData(10, 10)]
         [InlineData(400, 188)]
         [InlineData(4000000, 4613732)]
+        [InlineData(3, 2)]
+        [InlineData(11, 10)]
+        [InlineData(12, 10)]
         public void SumEvenFibonacciNumbers(long upTo, long expected)
         {
             long actual = 0;
