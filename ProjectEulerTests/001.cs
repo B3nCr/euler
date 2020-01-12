@@ -16,7 +16,9 @@ namespace ProjectEulerTests
         }
 
         [Theory]
+        [InlineData(2, 0)]
         [InlineData(10, 23)]
+        [InlineData(9, 14)]
         [InlineData(100, 2318)]
         [InlineData(1000, 233168)]
         public void SumMultiplesOf3and5UpToX(int upTo, int expected)
@@ -61,6 +63,16 @@ namespace ProjectEulerTests
 
             Assert.Equal(expected, actual);
         }
+
+        [Theory]
+        [InlineData(9, 3, 2)]
+        [InlineData(10, 3, 3)]
+        public void CountMulitplesOf(int upTo, int multiple, int expected)
+        {
+            var actual = GetCountOfMultiplesOf(multiple, upTo);
+            Assert.Equal(expected, actual);
+        }
+
 
         private static int GetCountOfMultiplesOf(int factor, int upTo)
         {
