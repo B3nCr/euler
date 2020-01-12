@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -21,7 +18,7 @@ namespace ProjectEulerTests
         [InlineData(9, 14)]
         [InlineData(100, 2318)]
         [InlineData(1000, 233168)]
-        public void SumMultiplesOf3and5UpToX(int upTo, int expected)
+        public void SumMultiplesOf3and5UpToX(long upTo, int expected)
         {
             var countOfMultiplesOf3 = GetCountOfMultiplesOf(3, upTo);
 
@@ -33,8 +30,7 @@ namespace ProjectEulerTests
             var countOfMultiplesOf15 = GetCountOfMultiplesOf(15, upTo);
             var sumOfMultiplesOf15 = 15 * SumSeriesUpToX(countOfMultiplesOf15);
 
-
-            int actual = 0;
+            long actual = 0;
             actual += sumOfMultiplesOf3;
             actual += sumOfMultiplesOf5;
             actual -= sumOfMultiplesOf15;
@@ -57,7 +53,7 @@ namespace ProjectEulerTests
         [InlineData(5, 10, 5)]
         public void SumMultiplesOfXUpToY(int multiple, int upTo, int expected)
         {
-            int numberOfMultiples = GetCountOfMultiplesOf(multiple, upTo);
+            var numberOfMultiples = GetCountOfMultiplesOf(multiple, upTo);
 
             var actual = multiple * SumSeriesUpToX(numberOfMultiples);
 
@@ -73,13 +69,12 @@ namespace ProjectEulerTests
             Assert.Equal(expected, actual);
         }
 
-
-        private static int GetCountOfMultiplesOf(int factor, int upTo)
+        private static long GetCountOfMultiplesOf(int factor, long upTo)
         {
             return (upTo - 1) / factor;
         }
 
-        private static int SumSeriesUpToX(int x)
+        private static long SumSeriesUpToX(long x)
         {
             return (x + 1) * x / 2;
         }
