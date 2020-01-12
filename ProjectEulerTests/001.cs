@@ -16,32 +16,60 @@ namespace ProjectEulerTests
         }
 
         [Theory]
-        [InlineData(2, 10, 100, 23, 2318)]
-        public void TestName(int cases, params int[] input)
+        [InlineData(10, 23)]
+        [InlineData(100, 2318)]
+        [InlineData(1000, 233168)]
+        public void SumMultiplesOf3and5UpToX(int upTo, int expected)
         {
-            var inputs = GetInputs(cases, input);
-            var expectations = GetExpectations(cases, input);
+            var countOfMultiplesOf3 = GetCountOfMultiplesOf(3, upTo);
 
-            outputHelper.WriteLine(string.Join(",", inputs));
+            var sumOfMultiplesOf3 = 3 * SumSeriesUpToX(countOfMultiplesOf3);
 
-            var actual = new List<int>();
+            var countOfMultiplesOf5 = GetCountOfMultiplesOf(5, upTo);
+            var sumOfMultiplesOf5 = 5 * SumSeriesUpToX(countOfMultiplesOf5);
 
-            foreach (int testcase in inputs.Select(x => x ))
-            {
-                int tally = 0;
+            var countOfMultiplesOf15 = GetCountOfMultiplesOf(15, upTo);
+            var sumOfMultiplesOf15 = 15 * SumSeriesUpToX(countOfMultiplesOf15);
 
-                for (int i = 1; i < testcase; i++)
-                {
-                    if (i % 3 == 0 || i % 5 == 0)
-                    {
-                        tally += i;
-                    }
-                }
 
-                actual.Add(tally);
-            }
+            int actual = 0;
+            actual += sumOfMultiplesOf3;
+            actual += sumOfMultiplesOf5;
+            actual -= sumOfMultiplesOf15;
 
-            Assert.Equal(expectations, actual);
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(10, 55)]
+        [InlineData(20, 210)]
+        public void SumNaturalNumbers(int upTo, int expected)
+        {
+            var actual = SumSeriesUpToX(upTo);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(3, 10, 18)]
+        [InlineData(5, 10, 5)]
+        public void SumMultiplesOfXUpToY(int multiple, int upTo, int expected)
+        {
+            int numberOfMultiples = GetCountOfMultiplesOf(multiple, upTo);
+
+            var actual = multiple * SumSeriesUpToX(numberOfMultiples);
+
+            Assert.Equal(expected, actual);
+        }
+
+        private static int GetCountOfMultiplesOf(int factor, int upTo)
+        {
+            return (upTo - 1) / factor;
+        }
+
+        private int SumSeriesUpToX(int x)
+        {
+            return (x + 1) * x / 2;
         }
 
         private List<int> GetExpectations(int cases, int[] input)
