@@ -67,19 +67,10 @@ namespace ProjectEulerTests
             return (upTo - 1) / factor;
         }
 
-        private int SumSeriesUpToX(int x)
+        private static int SumSeriesUpToX(int x)
         {
             return (x + 1) * x / 2;
         }
 
-        private List<int> GetExpectations(int cases, int[] input)
-        {
-            return new List<int>(input.Skip(cases).Take(cases));
-        }
-
-        private List<int> GetInputs(int cases, int[] input)
-        {
-            return new List<int>(input.Take(cases));
-        }
     }
 }
